@@ -1,6 +1,4 @@
-///
 /// Enumation of available BlaBlaCar countries
-///
 enum Country {
   france('France'),
   uk('United Kingdom'),
