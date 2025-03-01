@@ -4,7 +4,6 @@ import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
 import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
-import 'package:week_3_blabla_project/widgets/actions/bla_button.dart';
 
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 
@@ -22,7 +21,7 @@ class RidePrefScreen extends StatefulWidget {
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
   onRidePrefSelected(RidePref ridePref) {
-    // 1 - Navigate to the rides screen (with a buttom to top animation)
+    // 1 - Navigate to the rides screen (with a bottom to top animation)
   }
 
   @override
@@ -31,74 +30,39 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
       children: [
         // 1 - Background  Image
         BlaBackground(),
-
         // 2 - Foreground content
-        Column(
-          children: [
-            SizedBox(height: 16),
-            Text(
-              "Your pick of rides at low price",
-              style: BlaTextStyles.heading.copyWith(color: Colors.white),
-            ),
-            SizedBox(height: 300),
-
-            // 3 - BlaButtons
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BlaButton(
-                  type: BlaButtonType.secondary,
-                  icon: Icons.contact_support,
-                  text: "Contact Volodia",
-                  onPressed: () {
-                    // 1 - Navigate to the rides screen (with a buttom to top animation)
-                  },
-                ),
-                SizedBox(height: 10),
-                BlaButton(
-                  type: BlaButtonType.primary,
-                  icon: Icons.date_range,
-                  text: "Request to book",
-                  onPressed: () {
-                    // 1 - Navigate to the rides screen (with a buttom to top animation)
-                  },
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xxl),
-              decoration: BoxDecoration(
-                color: Colors.white, // White background
-                borderRadius: BorderRadius.circular(16), // Rounded corners
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xxl),
+          decoration: BoxDecoration(
+            color: Colors.white, // White background
+            borderRadius: BorderRadius.circular(16), // Rounded corners
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // 2.1 Display the Form to input the ride preferences
+              RidePrefForm(
+                initRidePref: RidePrefService.currentRidePref,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // 2.1 Display the Form to input the ride preferences
-                  RidePrefForm(
-                    initRidePref: RidePrefService.currentRidePref,
-                  ),
-                  SizedBox(height: BlaSpacings.m),
+              SizedBox(height: BlaSpacings.m),
 
-                  // 2.2 Optionally display a list of past preferences
-                  SizedBox(
-                    height: 200, 
-                    child: ListView.builder(
-                      shrinkWrap: true, 
-                      physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: RidePrefService.ridePrefsHistory.length,
-                      itemBuilder: (ctx, index) => RidePrefHistoryTile(
-                        ridePref: RidePrefService.ridePrefsHistory[index],
-                        onPressed: () => onRidePrefSelected(
-                            RidePrefService.ridePrefsHistory[index]),
-                      ),
-                    ),
+              // 2.2 Optionally display a list of past preferences
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  itemCount: RidePrefService.ridePrefsHistory.length,
+                  itemBuilder: (ctx, index) => RidePrefHistoryTile(
+                    ridePref: RidePrefService.ridePrefsHistory[index],
+                    onPressed: () => onRidePrefSelected(
+                        RidePrefService.ridePrefsHistory[index]),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
