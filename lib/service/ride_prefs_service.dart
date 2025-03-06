@@ -1,4 +1,6 @@
 
+import 'package:week_3_blabla_project/repository/mock/mock_ride_preferences_repository.dart';
+
 import '../dummy_data/dummy_data.dart';
 import '../model/ride_pref/ride_pref.dart';
 
@@ -17,5 +19,7 @@ class RidePrefService {
   static RidePref? currentRidePref;
  
   static bool get hasCurrentRidePref => currentRidePref != null;
+
+  static void initialize(MockRidePreferencesRepository mockRidePreferencesRepository) {}
   
 }

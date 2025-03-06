@@ -36,7 +36,7 @@ class Ride {
     required this.arrivalDateTime,
     required this.driver,
     required this.availableSeats,
-    required this.pricePerSeat,
+    required this.pricePerSeat, required bool acceptPets, required duration,
   });
 
   void addPassenger(User passenger) {
@@ -44,6 +44,8 @@ class Ride {
   }
 
   int get remainingSeats => availableSeats - passengers.length;
+
+  Object? get acceptPets => false;
 
   @override
   String toString() {
